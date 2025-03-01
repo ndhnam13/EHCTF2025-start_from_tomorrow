@@ -82,3 +82,5 @@ Nói chung là `NTUSER.DAT` được Windows tự tạo trong thư mục của n
 `opera_update.exe` sẽ tự động chạy mỗi khi mở máy - Nếu export file này ra và chạy trên máy ảo sẽ tự động bật chrome lên và liên tục mở các tab 2ten mới cùng với đó là đặt hình nền thành màu đen => Flag
 
 EHCTF{C:\Users\anhyeuem\AppData\Local\Temp\opera_update.exe}
+
+# RE: DIFR 05
