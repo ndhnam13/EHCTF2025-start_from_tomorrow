@@ -1,5 +1,5 @@
 # 5 Forensic, 1 RE
-# Me ni mieru tokoro ni kakusarete iru
+# Forensic: Me ni mieru tokoro ni kakusarete iru
 ![image](https://github.com/user-attachments/assets/09062877-cbfb-41ba-8c3f-56dab0a00fc4)
 
 ![FOR_2](https://github.com/user-attachments/assets/00b50a26-ba28-41c2-9f29-a6f92ae70d81)
@@ -43,14 +43,14 @@ Open database và vào phần download ta thấy link tải phần mềm và tê
 ![image](https://github.com/user-attachments/assets/3ba7f74f-47c5-4902-a065-bada08b36bbf)
 
 EHCTF{https://files.sakamoto.moe/a83fc152b20b_miku%20haiten.exe}
-# DFIR 02
+# Forensic: DFIR 02
 ![image](https://github.com/user-attachments/assets/bc06d1d3-806e-41e1-978b-de4acc2dc3da)
 
 Ta có thể tải file về = cách nhấn vào url hoặc xem phần đuôi của url đó (Dấu cách trong một cái url = %20 nên bỏ %20 đi) `a83fc152b20b_miku haiten.exe` 
 
 EHCTF{a83fc152b20b_miku haiten.exe}
 
-# DFIR 03
+# Forensic: DFIR 03
 ![image](https://github.com/user-attachments/assets/09b48541-3ae4-4c47-916d-4895945d1079)
 
 https://attack.mitre.org/techniques/enterprise/
@@ -61,7 +61,7 @@ Máy ABQ bị dính mã độc persistence, mô tả nói rằng máy gặp vấ
 
 EHCTF{T1547.001}
 
-# DFIR 04
+# Forensic: DFIR 04
 ![image](https://github.com/user-attachments/assets/00827da1-55cf-4e49-9baf-158de5e1d99e)
 
 Để tìm ra path của file thực thi persistent T1547.001 "Registry Run Keys / Startup Folder" theo https://attack.mitre.org/techniques/T1547/001/ sẽ thường nằm trong
