@@ -1,4 +1,11 @@
 # 5 Forensic, 1 RE
+## Mục lục
+- [Forensic: Me ni mieru tokoro ni kakusarete iru](#forensic-me-ni-mieru-tokoro-ni-kakusarete-iru)
+- [Forensic: DFIR 01](#forensic-dfir-01)
+- [Forensic: DFIR 02](#forensic-dfir-02)
+- [Forensic: DFIR 03](#forensic-dfir-03)
+- [Forensic: DFIR 04](#forensic-dfir-04)
+- [RE: DFIR 05](#re-dfir-05)
 # Forensic: Me ni mieru tokoro ni kakusarete iru
 ![image](https://github.com/user-attachments/assets/09062877-cbfb-41ba-8c3f-56dab0a00fc4)
 
@@ -22,7 +29,7 @@ Lưu lại và ra flag
 
 EHC{b13t_fl4g5tructur3_r01_d0}
 
-# DFIR 01
+# Forensic: DFIR 01
 https://ehctf-2025-public.s3.ap-southeast-1.amazonaws.com/Evidence.rar
 ![image](https://github.com/user-attachments/assets/874eb7a0-cca9-43f4-8e20-afdd37506d13)
 
@@ -34,7 +41,7 @@ https://medium.com/@laurent.mandine/browser-forensics-89429fe0749f
 
 ABQ tải xuống một file lạ, nếu kiểm trong thư mục download của user `anhyeuem` sẽ không thấy gì, có thể file độc đã bị xoá
 
-Các trình duyệt thường lưu trữ lịch sử của người dùng trong thư mục `C:\Users\<username>\AppData\...`, kiểm tra qua các file của ổ đĩa này ta chỉ thấy có Google Chrome, không có opera (Nên ghi nhớ, sẽ liên quan đến DFIR 04), firefox 
+Các trình duyệt thường lưu trữ lịch sử của người dùng trong thư mục `C:\Users\<username>\AppData\...`, kiểm tra qua các file của ổ đĩa này ta chỉ thấy có Google Chrome, không có opera (vẫn có thư mục opera ở trong `Program Files (x86)` nhưng trong đó lại chứa một file .exe rất lạ? `kumi.exe`-sẽ dùng để làm bài dfir05), firefox 
 
 Export file `C:\Users\anhyeuem\AppData\Local\Google\Chrome\User Data\Default\History` ra và có thể xem = phần mềm DB browser
 
@@ -84,3 +91,29 @@ Nói chung là `NTUSER.DAT` được Windows tự tạo trong thư mục của n
 EHCTF{C:\Users\anhyeuem\AppData\Local\Temp\opera_update.exe}
 
 # RE: DIFR 05
+![image](https://github.com/user-attachments/assets/cb876cab-750e-4a1e-b210-a36bc61330de)
+
+Quay trở lại với file `a83fc152b20b_miku haiten.exe` nếu mở lên sẽ bảo tải một file gì đó vào thư mục `C:\Program Files (x86)\Opera\miku haiten\`
+
+![image](https://github.com/user-attachments/assets/8b533b40-51d1-4277-b4eb-1ab1ab530a5f)
+
+![image](https://github.com/user-attachments/assets/182ceece-af32-47a7-8938-5f3c0f6a80ed)
+
+`kumi.exe` là file chứa mã độc cần phải phân tích
+
+Muốn biết `kumi.exe` sử dụng phần mềm gì để download background thì cần đưa nó vào một trình dịch ngược để phân tích code gốc, nếu muốn biết file được viết bằng gì có thể dùng phần mềm DiE-detect it easy
+
+PHÂN TÍCH `kumi.exe`:
+- Đưa vào DiE để tự động scan
+- ![image](https://github.com/user-attachments/assets/fe961475-5617-485b-820d-2f3f20163919)
+- Kết quả trả về là 1 file C/C++, nếu load file này trong IDA sẽ mất rất lâu?
+- Đoạn này được a tmq hint là DiE báo là C/C++ nhưng có thể file đã đánh lừa tool
+- Nghe xong thấy cũng hợp lí bởi vì `kumi.exe` hoạt động khá đơn giản, add `opera_update.exe` vào registry run key, start up folder khiến nó chạy mỗi khi mở máy. Mà cả 2 file này lại nặng tận 64,3MB chúng tỏ đã bị thêm gì đó vào
+- Nếu đưa chatgpt phân tích trả về 3 kq Pascal, C#, Rust
+- ![image](https://github.com/user-attachments/assets/2063b8c5-9aee-45b9-9ecc-75291ccf5bbd)
+- Sử dụng 1 loại scan khác là Yara rules trên DiE ở mục packer có được kết quả `NETDLLMicrosoft`, ở đây em đoán là file .NET này đã bị đóng gói và chèn dữ liệu vào header khiến DiE scan ra 1 file C++ compiled = VS
+- ![image](https://github.com/user-attachments/assets/684c7205-662a-401e-acff-a84d1f72a1eb)
+- Cho vào trong Jetbrains dotPeek tại phần namespace ta thấy được code gốc của `kumi.exe` và cách nó hoạt động, sử dụng file `certutil.exe` để download background 
+- ![image](https://github.com/user-attachments/assets/90da5be6-793a-4b08-b80b-04c7110c9c5d)
+
+EHCTF{certutil.exe}
