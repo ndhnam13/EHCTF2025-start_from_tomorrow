@@ -113,6 +113,9 @@ PHÂN TÍCH `kumi.exe`:
 - ![image](https://github.com/user-attachments/assets/2063b8c5-9aee-45b9-9ecc-75291ccf5bbd)
 - Sử dụng 1 loại scan khác là Yara rules trên DiE ở mục packer có được kết quả `NETDLLMicrosoft`, ở đây em đoán là file .NET này đã bị đóng gói và chèn dữ liệu vào header khiến DiE scan ra 1 file C++ compiled = VS
 - ![image](https://github.com/user-attachments/assets/684c7205-662a-401e-acff-a84d1f72a1eb)
+- Hmmm vậy đây có thể là một file Microsoft .NET, tìm trên [google](https://www.moserware.com/2007/11/mz-bsjb-and-joys-of-magic-constants-in.html) ta biết một file .NET bị packed/obfuscated sẽ có signature BSJB(0x425A4342)
+- ![image](https://github.com/user-attachments/assets/14c40492-356a-4270-9703-81751f731eee)
+- Khá hay nếu ta google [v4.0.30.319](https://www.google.com/search?q=v4.0.30.319&oq=v4.0.30.319&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBBzM1NmowajeoAgiwAgHxBTFjh4m3H0BA&sourceid=chrome&ie=UTF-8) đây là 1 phiên bản của netframework, tới đây khá chắc chắn `kumi.exe` là file .NET rồi
 - Cho vào trong Jetbrains dotPeek tại phần namespace ta thấy được code gốc của `kumi.exe` và cách nó hoạt động, sử dụng file `certutil.exe` để download background 
 - ![image](https://github.com/user-attachments/assets/90da5be6-793a-4b08-b80b-04c7110c9c5d)
 
