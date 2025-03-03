@@ -90,7 +90,7 @@ Nói chung là `NTUSER.DAT` được Windows tự tạo trong thư mục của n
 
 EHCTF{C:\Users\anhyeuem\AppData\Local\Temp\opera_update.exe}
 
-# RE: DIFR 05
+# RE: DFIR 05
 ![image](https://github.com/user-attachments/assets/cb876cab-750e-4a1e-b210-a36bc61330de)
 
 Quay trở lại với file `a83fc152b20b_miku haiten.exe` nếu mở lên sẽ bảo tải một file gì đó vào thư mục `C:\Program Files (x86)\Opera\miku haiten\`
